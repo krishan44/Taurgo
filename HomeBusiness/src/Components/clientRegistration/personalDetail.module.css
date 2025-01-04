@@ -62,7 +62,7 @@
 .inputGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;  /* Reduced from 24px to 16px */
+    gap: 16px;  
     margin-top: 24px;
 }
 
@@ -96,7 +96,8 @@
     padding: 12px 14px;   
     width: 545px;
     height: 48px;
-    margin-top: 2px;    margin-bottom: 0;  /* Remove bottom margin if any */
+    margin-top: 2px;   
+    margin-bottom: 0; 
 }
 
 
