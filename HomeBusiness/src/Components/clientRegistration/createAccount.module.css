@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*{
+    font-family:  "Inter", serif;
+    /* background-color: aqua; */
+}
+
+.mainContainer {
+    display: flex;
+    background-color: #FFF; 
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.inputContainer {
+    width: 360px;
+    height: 742px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.registerContainer {  
+    width: 360px;
+    height: 566px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.logoPartner {
+    position: absolute;
+    bottom: 20px;
+    width: 650px;
+    height: 96px;
+    left: 25%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #000;
+}
+
+.logoPartner img {
+    width: 75.38px;
+    height: 36px;
+    border: none;
+}
+
+.imageContainer {
+    margin-left: auto;
+    width: 800px;
+    height: 100vh;
+}
+
+.loginPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo {
+    width: 151px;
+    height: 50px;
+    margin: 0; 
+    margin-bottom: 80px;
+}
+
+input[type="password"] {
+    margin-bottom: 6px; 
+}
+
+.loginFields {
+    width: 100%;  
+    display: flex;
+    flex-direction: column;
+}
+
+.registerFields {  
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginFields h2{
+    font-size: 32px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    line-height: 44px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    
+}
+
+.welcomeText{
+    font-size: 16px;
+    color: #808080;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.fieldName{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+.loginFields input {
+    border: 1px solid #CACACA;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    box-shadow: 0 1px 2px #1018280D;
+}
+
+.loginFields input[type="password"] {
+    margin-bottom: 6px;
+}
+
+.signinBtn{
+    width: 100%;
+    height: 44px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: #FFF;
+    background-color: #035C59;
+    margin-top: 16px;
+    box-shadow: 0 1px 2px #1018280D;
+    cursor: pointer;
+}
+
+.registerText {
+    text-align: center;
+    margin-top: 12px;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #808080;
+}
+
+.registerText a {
+    color: #035C59;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bottomElements {
+    position: relative;
+    top: 736px;
+    width: 640px;
+    display: flex;
+    justify-content: space-between;
+    padding: 32px;
+}
+
+.copyright {
+    color: #000;
+    font-size: 14px;
+}
+
+.techPartner {
+    width: 75.38px;
+    height: 36px;
+}
+
+.copyright {
+    color: #000;
+    font-size: 14px;
+    z-index: 2;
+}
+
+.techPartnerContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    z-index: 2;
+}
+
+.techPartner {
+    width: 75.38px;
+    height: 36px;
+}
+
+.changeBtns{
+    display: flex;
+    gap: 12px;
+}
+
+.btnClient{
+    padding: 10px 16px;
+    border-radius: 8px;
+    width: 174px;
+    height: 44px;
+    border: none;
+    background-color: #035C59;
+    color: #FFF;
+}
+
+.btnPartner{
+    padding: 10px 16px;
+    border-radius: 8px;
+    width: 174px;
+    height: 44px;
+    border: 2px solid #CACACA;
+    color: #000;
+}
+
+
