@@ -14,14 +14,14 @@ function CreateAccount() {
                     <a href=""><button className={style.btnPartner}>Register as a Partner</button></a>
                     </div>
                     <h2>Create your Account</h2>
-                    <span className={style.fieldName}>Email</span>
-                    <input type="text" placeholder='Enter your Email' required />
+                    <span className={style.fieldName}>Organisation Reference</span>
+                    <input type="text" placeholder='Organisation name' required />
                     <span className={style.fieldName}>Email</span>
                     <input type="text" placeholder='Enter your Email' required />
                     <span className={style.fieldName}>Password</span>
-                    <input type="password" placeholder='********' required/>
+                    <input type="password" placeholder='••••••••' required/>
                     <span className={style.fieldName}>Repeat Password</span>
-                    <input type="password" placeholder='********' required/>
+                    <input type="password" placeholder='••••••••' required/>
                 
                     <a href=""><button className={style.signinBtn}>Register</button></a>
                     <span className={style.registerText}>I have an Account? <a href="">Login</a></span>
