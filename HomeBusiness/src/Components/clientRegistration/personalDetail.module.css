@@ -41,3 +41,77 @@
     margin: 0 12px;
     color: #808080;
 }
+
+.Details {
+    width: 1170px;
+    height: 370px;
+    position: relative;
+    top: 40px;
+    left: 135px;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25.2px;
+    color: #000;
+}
+
+.inputGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;  /* Reduced from 24px to 16px */
+    margin-top: 24px;
+}
+
+.inputFields{
+    margin-top: 0;  /* Remove top margin */
+    width: 545px;
+}
+
+.required{
+    color: #E73F3F;
+    margin-left: 4px;
+    font-size: 14px;
+    
+}
+
+.fieldName{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22.4px;
+    color: #000000;
+    width: 545px;
+    height: 22px;
+    display: inline-block;  
+    margin-bottom: 2px;     
+    /* margin-top: 12px;        */
+}
+
+.datafield{
+    border: 1px solid #CACACA;
+    border-radius: 8px;
+    padding: 12px 14px;   
+    width: 545px;
+    height: 48px;
+    margin-top: 2px;    margin-bottom: 0;  /* Remove bottom margin if any */
+}
+
+
+.btnNext{
+    width: 63px;
+    height: 42px;
+    padding: 10px 16px ;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+    background-color: #035C59;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    top: 24px;
+    left: 1043px;
+}
