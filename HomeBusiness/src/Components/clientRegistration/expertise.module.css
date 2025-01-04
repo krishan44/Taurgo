@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.registerProcess{
+    height: 100vh;  
+    font-family: "Poppins", serif;
+    padding: 40px 0;
+}
+
+.pageHeader{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 1280px;
+    height: 72px;
+    gap: 12px;
+    position: relative;
+    top: 40px; 
+    left: 80px;
+    padding: 24px 32px;
+    border: 1px solid #CACACA;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.number{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #373737;
+    margin-right: 8px;
+}
+
+.selected .number {
+    background-color: #035C59;
+    color: #FFF;
+    border-color: #035C59;
+}
+
+.dash {
+    display: inline-block;
+    transform: rotate(90deg);
+    margin: 0 12px;
+    color: #808080;
+}
+
+.pageContent {
+    width: 1170px;
+    height: 735px;
+    /* background-color: #CACACA; */
+    position: relative;
+    top: 40px; 
+    left: 135px;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.Content{
+    width: 1106px;
+    height: 603px;
+    display: flex;
+    flex-direction: column;
+}
+
+.greeting{
+    width: 1106px;
+    height: 50px;
+    border-radius: 45px;
+    border: 1px solid #A1DAD8;
+    background-color: #F5F8F8;
+    padding: 14px 24px;
+}
+
+.greeting span{
+    display: inline-block;
+    width: 1058px;
+    font-family: "Poppins", serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22.4px;
+    text-align: center;
+    color: #035C59;
+}
+
+.Instruction{
+    margin-top: 12px;
+    height: 180px;
+    font-family: "Poppins", serif;
+    width: 1106px;
+    color: #808080;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19.6px;
+}
+
+.first{
+    color: #000;
+}
+
+.businessSize{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25.2px;
+    margin-top: 12px;
+}
+
+.checkBoxes{
+    margin-top: 12px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    width: 1106px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px;
+    border: 1px  solid #CACACA;
+    border-radius: 8px;
+}
+
+.type{
+    font-size: 16px;
+    margin-left: 16px;
+    width: 978px;
+    font-weight: 400;
+    height: 26px;
+    display: inline-block;
+}
+
+.box input{
+    width: 16.5px;
+    height: 16.5px;
+    position: relative;
+    left: 3.5px;
+    border: 1.5px solid #000000;
+    border-radius: none;
+}
+
+.dropDownIcon {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+.boxContent {
+    width: 100%;
+    /* margin-top: 12px; */
+    font-size: 16px;
+    line-height: 25.6px;
+    font-weight: 400;
+    width: 978px;
+    height: 52px;
+    margin-left: 40px;
+}
+
+.selected{
+    color: #035C59;
+}
+
+.btnNext{
+    width: 63px;
+    height: 42px;
+    padding: 10px 16px ;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+    background-color: #035C59;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    left: 1043px;
+}
+
+
