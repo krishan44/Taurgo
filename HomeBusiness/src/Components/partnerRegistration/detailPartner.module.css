@@ -2,6 +2,7 @@
     height: 100vh;  
     font-family: "Poppins", serif;
     padding: 40px 0;
+    margin-bottom: 50px;
 }
 
 .pageHeader{
@@ -126,9 +127,9 @@
 }
 
 .inputFields{
-    margin-top: 0;  /* Remove top margin */
+    margin-top: 0;  
     width: 545px;
-    position: relative; /* Add this */
+    position: relative; 
 }
 
 .required{
@@ -193,8 +194,10 @@
 }
 
 .calendarWrapper {
-    position: fixed; 
-    z-index: 1000; 
+    position: absolute; 
+    top: calc(100% + 4px); 
+    left: 0;
+    z-index: 1000;
     background: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
@@ -254,7 +257,7 @@
 .fieldHeader {
     display: flex;
     align-items: center;
-    gap: 8px; /* Add small gap between text and icon */
+    gap: 8px; 
 }
 
 .fieldHeader .fieldName{

@@ -37,14 +37,7 @@ function DetailPartner() {
 
     const handleDateClick = () => {
         setShowCalendar(true);
-        // Get the input field's position
-        const inputElement = document.getElementById('birthDate');
-        const rect = inputElement.getBoundingClientRect();
-        const calendarElement = document.querySelector(`.${style.calendarWrapper}`);
-        if (calendarElement) {
-            calendarElement.style.top = `${rect.bottom + 8}px`;
-            calendarElement.style.left = `${rect.left}px`;
-        }
+
     };
 
     const handleDateSelect = (date) => {
