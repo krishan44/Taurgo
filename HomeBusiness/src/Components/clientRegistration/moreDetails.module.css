@@ -46,7 +46,7 @@
 .form{
     width: 1170px;
     height: 1499px;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     position: relative;
     top: 64px; 
     left: 135px;
@@ -193,4 +193,67 @@
 
 .Inspections{
     margin-top: 8px;
+}
+
+.reportDelivery {
+    margin-top: 8px;
+}
+
+.additionalInfo{
+    margin-top: 8px;
+}
+
+.payMethod {
+    margin-top: 8px;
+}
+
+.Info{
+    width: 1106px;
+    height: 141px;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #CACACA;
+    font-family: 'inter';
+    font-weight: 500;
+    resize: none;
+    border-radius: 8px;
+    background-color: #FFF;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 1106px;
+    margin-top: 12px;
+}
+
+.btnNext{
+    width: 63px;
+    height: 42px;
+    padding: 10px 16px ;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+    background-color: #035C59;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.goBack{
+    text-decoration: none;
+    color: #035C59;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22.4px;
+    font-weight: 400;
+}
+
+.goBack img{
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
