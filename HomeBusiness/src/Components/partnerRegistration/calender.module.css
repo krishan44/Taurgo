@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+
+.datepicker {
+	width: 280px;
+	background: #FFFFFF;
+	border: 1px solid #CACACA;
+	border-radius: 8px;
+	padding: 16px;
+	font-family: "Manrope", serif;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.datepickerTop {
+	margin-bottom: 16px;
+}
+
+.btn-group {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1rem;
+	margin-top: -.5rem;
+}
+
+.tag {
+	margin-right: .5rem;
+	margin-top: .5rem;
+	border: 0;
+	background-color: var(--c-bg-secondary);
+	border-radius: 10px;
+	padding: .5em .75em;
+	font-weight: 600;
+}
+
+.monthSelector {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.arrow {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 2px;  /* Reduced padding */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.arrow img {
+    width: 40px;  
+    height: 40px; 
+}
+
+.monthName {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.datepickerCalendar {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 4px;
+}
+
+.day {
+	text-align: center;
+	font-size: 12px;
+	font-weight: 500;
+	color: #666;
+	padding: 8px 0;
+}
+
+.date {
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: none;
+	border-radius: 4px;
+	font-size: 14px;
+	color: #333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.date:hover {
+	background-color: #F5F5F5;
+}
+
+.faded {
+	color: #CACACA;
+}
+
+.currentDay {
+    background-color: transparent; 
+    color: #333; 
+    border: 2px solid #035C59;
+    border-radius: 50%; 
+}
+
+.currentDay:hover {
+    background-color: #F5F5F5; 
+    border-color: #024644;
+}
+
+.rotateIcon {
+    transform: rotate(180deg);
+}
+
+.yearText {
+    cursor: pointer;
+}
+
+.yearInput {
+    width: 60px;
+    border: 1px solid #CACACA;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 16px;
+    font-family: inherit;
+    text-align: center;
+}
+
+.yearInput:focus {
+    outline: none;
+    border-color: #035C59;
+}
+
+.yearSelector {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #CACACA;
+    border-radius: 8px;
+    margin-top: 4px;
+    z-index: 10;
+}
+
+.yearOption {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.yearOption:hover {
+    background-color: #F5F5F5;
+}
+
+.selectedDate {
+    background-color: #035C59 !important;
+    color: #FFF !important;
+    border-radius: 50%;
+}
+
+.buttons{
+    margin-top: 10px;
+    display: flex;
+    gap: 12px;
+    justify-content: space-evenly;
+}
+
+.Apply,.cancel{
+    width: 134px;
+    height: 40px;
+    background-color: #035C59;
+    color: #FFF;
+    border-radius: 8px;
+}
+
+.cancel{
+    background-color: #FFFFFF;   
+    border: 1px solid #035C59;
+    color: #000000;
+}

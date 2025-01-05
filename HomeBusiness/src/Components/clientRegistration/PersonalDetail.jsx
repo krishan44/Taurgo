@@ -32,7 +32,7 @@ function PersonalDetail() {
                             </span>
                             <br />
                             <input 
-                                type="tel" 
+                                type="text" 
                                 className={style.datafield}  
                                 placeholder='Full Name' 
                                 required 

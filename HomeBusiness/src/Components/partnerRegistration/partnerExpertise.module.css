@@ -4,6 +4,7 @@
     height: 100vh;  
     font-family: "Poppins", serif;
     padding: 40px 0;
+    margin-bottom: 220px;
 }
 
 .pageHeader{
@@ -52,13 +53,12 @@
 
 .pageContent {
     width: 1170px;
-    height: 735px;
-    /* background-color: #CACACA; */
     position: relative;
     top: 64px; 
     left: 135px;
     border-radius: 12px;
     padding: 32px;
+    
 }
 
 .Content{
@@ -90,7 +90,7 @@
 
 .Instruction{
     margin-top: 12px;
-    height: 180px;
+    height: 273px;
     font-family: "Poppins", serif;
     width: 1106px;
     color: #808080;
@@ -107,7 +107,8 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 25.2px;
-    margin-top: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .checkBoxes{
@@ -165,7 +166,7 @@
     line-height: 25.6px;
     font-weight: 400;
     width: 978px;
-    height: 52px;
+    height: 402px;
     margin-left: 40px;
 }
 
@@ -179,6 +180,7 @@
     padding: 10px 16px ;
     border-radius: 8px;
     margin-top: 10px;
+    display: block;
     border: none;
     background-color: #035C59;
     color: #fff;
@@ -186,6 +188,20 @@
     cursor: pointer;
     position: relative;
     left: 1043px;
+    
+}
+
+.list{
+    color: #808080;
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+    left: 24px;
+}
+
+.role{
+    position: relative;
+    top: 24px;
 }
 
 
