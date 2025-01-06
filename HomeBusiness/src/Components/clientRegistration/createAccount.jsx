@@ -1,31 +1,106 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import style from "./createAccount.module.css";  
 import logoTaurgo from "../../assets/loginPage/logoTaurgo.png";
 import loginPhoto from "../../assets/loginPage/loginPhoto.jpeg";
 import RICS from "../../assets/loginPage/RICS.png";
 
 function CreateAccount() {  
-    return(
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        organisation: '',
+        email: '',
+        password: '',
+        repeatPassword: '',
+    });
+
+    const [error, setError] = useState('');
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setError(''); 
+    };
+
+    const handleRegister = () => {
+        const { organisation, email, password, repeatPassword } = formData;
+    
+        if (!organisation || !email || !password || !repeatPassword) {
+            setError('All fields must be filled!');
+            return;
+        }
+    
+        if (password !== repeatPassword) {
+            setError('Passwords do not match!');
+            return;
+        }
+    
+        // console.log('Registration successful:', formData);
+        // alert('Registration successful!');
+        navigate('/expertise'); // Navigate to expertise page
+    };
+
+    return (
         <div className={style.mainContainer}>
             <div className={style.inputContainer}>
                 <img src={logoTaurgo} alt="Logo" className={style.logo} /> 
                 <div className={style.loginFields}>
                     <div className={style.changeBtns}>
-                    <a href=""><button className={style.btnClient}>Register as a Client</button></a>
-                    <a href=""><button className={style.btnPartner}>Register as a Partner</button></a>
+                        <Link to="/client-register">
+                            <button className={style.btnClient}>Register as a Client</button>
+                        </Link>
+                        <Link to="/register">
+                            <button className={style.btnPartner}>Register as a Partner</button>
+                        </Link>
                     </div>
                     <h2>Create your Account</h2>
+                    {error && <p className={style.error}>{error}</p>} {/* Display error message */}
                     <span className={style.fieldName}>Organisation Reference</span>
-                    <input type="text" placeholder='Organisation name' required />
+                    <input 
+                        type="text" 
+                        placeholder='Organisation name' 
+                        name="organisation" 
+                        value={formData.organisation}
+                        onChange={handleChange}
+                        required 
+                    />
                     <span className={style.fieldName}>Email</span>
-                    <input type="text" placeholder='Enter your Email' required />
+                    <input 
+                        type="text" 
+                        placeholder='Enter your Email' 
+                        name="email" 
+                        value={formData.email}
+                        onChange={handleChange}
+                        required 
+                    />
                     <span className={style.fieldName}>Password</span>
-                    <input type="password" placeholder='••••••••' required/>
+                    <input 
+                        type="password" 
+                        placeholder='••••••••' 
+                        name="password" 
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
                     <span className={style.fieldName}>Repeat Password</span>
-                    <input type="password" placeholder='••••••••' required/>
+                    <input 
+                        type="password" 
+                        placeholder='••••••••' 
+                        name="repeatPassword" 
+                        value={formData.repeatPassword}
+                        onChange={handleChange}
+                        required
+                    />
                 
-                    <a href=""><button className={style.signinBtn}>Register</button></a>
-                    <span className={style.registerText}>I have an Account? <a href="">Login</a></span>
-
+                    <button 
+                        className={style.signinBtn} 
+                        onClick={handleRegister}
+                    >
+                        Register
+                    </button>
+                    <span className={style.registerText}>I have an Account? 
+                        <Link to="/login">Login</Link>
+                    </span>
                 </div>
             </div>
             <div className={style.bottomElements}>
@@ -34,10 +109,9 @@ function CreateAccount() {
             </div>
             <div className={style.imageContainer}>
                 <img src={loginPhoto} alt="Houses" className={style.loginPhoto} />
-                
             </div>
         </div>
-    )
+    );
 }
 
 export default CreateAccount;

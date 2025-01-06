@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from "./expertise.module.css";
 import dropDownIcon from "../../assets/icons/dropDown.png"; 
 
 function Expertise() {
+    const navigate = useNavigate();
+
     // Separate state for each dropdown
     const [openDropdowns, setOpenDropdowns] = useState({
         individual: false,
@@ -10,8 +13,9 @@ function Expertise() {
         medium: false
     });
 
-    // Single state for selected business type
     const [selectedBusiness, setSelectedBusiness] = useState('');
+
+    const [error, setError] = useState('');
 
     const toggleDropdown = (type) => {
         setOpenDropdowns(prev => ({
@@ -22,11 +26,20 @@ function Expertise() {
 
     const handleCheckboxChange = (type) => {
         setSelectedBusiness(type);
+        setError(''); 
     };
 
-    return(
-        <>  
+    const handleNext = () => {
+        if (!selectedBusiness) {
+            setError('Please select a business type before proceeding.');
+            return;
+        }
+        // Navigate to the next page
+        navigate('/personal-details'); 
+    };
 
+    return (
+        <>  
         <div className={style.registerProcess}>
             <div className={style.pageHeader}>
                 <div> <span className={style.selected}><span className={style.number}>1 </span><span>Select your experties <span className={style.dash}>|</span></span></span> </div>
@@ -35,24 +48,26 @@ function Expertise() {
                 <div> <span className={style.number}>4 </span><span>Fit To Work <span className={style.dash}>|</span></span> </div>
                 <div> <span className={style.number}>5 </span><span>Onbording Form Complete</span> </div>
             </div>
+            {error && <p className={style.error}>{error}</p>} {/* Display error */}
             <div className={style.pageContent}>
+            
                 <div className={style.Content}>
                     <div className={style.greeting}>
                         <span>Thank you for choosing to partner with Taurgo.</span>
                     </div>
                     <div className={style.Instruction}>
-                            <span className={style.first}>
-                                To ensure a successful partnership, please follow the Taurgo registration process <br />
-                            </span>
-                            <span>
-                                <br />
-                                Complete the Registration Form: <br />
-                                Please fill out the required details on the Taurgo registration process. This information is essential for our initial due diligence to ensure you are placed within the correct team and area of Taurgo. <br />
-                            </span>
-                            <span>
-                                <br /> Onboarding with Taurgo: <br /> 
-                                After submitting the registration form, a member of the Taurgo team will reach out to you to complete the onboarding process. They will guide you through the platform if required and ensure you are properly onboarded with the right support and resources.
-                            </span>
+                        <span className={style.first}>
+                            To ensure a successful partnership, please follow the Taurgo registration process <br />
+                        </span>
+                        <span>
+                            <br />
+                            Complete the Registration Form: <br />
+                            Please fill out the required details on the Taurgo registration process. This information is essential for our initial due diligence to ensure you are placed within the correct team and area of Taurgo. <br />
+                        </span>
+                        <span>
+                            <br /> Onboarding with Taurgo: <br /> 
+                            After submitting the registration form, a member of the Taurgo team will reach out to you to complete the onboarding process. They will guide you through the platform if required and ensure you are properly onboarded with the right support and resources.
+                        </span>
                     </div>
                     <span className={style.businessSize}>
                         Select your size of business
@@ -121,13 +136,12 @@ function Expertise() {
                             )}
                         </div>
                     </div>
-                    <a href="" className={style.btnNext}>Next</a>
+                    <button className={style.btnNext} onClick={handleNext}>Next</button>
                 </div>
             </div>    
         </div>
         </>
-    )
-
+    );
 }
 
 export default Expertise;

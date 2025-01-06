@@ -1,4 +1,5 @@
 import style from "./complete.module.css"
+import { Link } from 'react-router-dom';
 
 function Complete(){
     return (
@@ -40,7 +41,7 @@ function Complete(){
                 </div>
                 
             </div>
-            <a href="" className={style.btnNext}>Finish</a>
+            <Link to="/complete-client"><span className={style.btnNext}>Finish</span></Link> {/* Use absolute path */}
         </div>
         </>
     )

@@ -2,8 +2,9 @@
 
 .addressDetails{
     font-family: "Poppins", serif;
-    height: 1024px;
+    /* height: 1024px; */
     width: 1440px;
+    margin-bottom: 30px;
     padding: 40px 0;
 }
 
@@ -242,6 +243,9 @@
     text-decoration: none;
     color: #035C59;
     display: flex;
+    background-color: #FFF;
+    border: none;
+    cursor: pointer;
     align-items: center;
     font-size: 14px;
     line-height: 22.4px;
@@ -258,7 +262,7 @@
     position: relative;
     display: inline-flex;  
     align-items: center;
-    margin-left: -15px;  /* Adjust position relative to text */
+    margin-left: -15px; 
 }
 
 .infoIcon {
@@ -267,7 +271,6 @@
     cursor: pointer;
     position: relative;
     bottom: 5.5px; 
-    /* right: 15px; */
     margin-top: 2px;
 }
 
@@ -317,3 +320,20 @@
     height: 22px;
     margin-bottom: 8px;
 }
+
+.error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #e4e4e4db;
+    color: #035C59;
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 0px;
+    z-index: 1000;
+}
+

@@ -188,4 +188,20 @@
     left: 1043px;
 }
 
+.error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #e4e4e4db;
+    color: #035C59;
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 0px;
+    z-index: 1000;
+}
+
 

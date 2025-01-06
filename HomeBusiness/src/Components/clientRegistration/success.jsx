@@ -12,7 +12,7 @@ function Success(){
                     You have completed the registration process</span>
                 </div>
                 <img src={right} alt="" className={style.right}/>
-                <a href="">Ok</a>
+                <a href="/">Ok</a> 
             </div>
         </>
     )
