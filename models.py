@@ -6,148 +6,149 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'users'
 
-    loginId = db.Column(db.Integer, primary_key=True)
+    loginid = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String(255), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
 
     def __repr__(self):
-        return f'<User {self.loginId}>'
+        return f'<User {self.loginid}>'
 
 class ClientRegister(db.Model):
-    __tablename__ = 'clientRegister'
+    __tablename__ = 'clientregister'
 
-    ClientId = db.Column(db.Integer, primary_key=True)
-    orgName = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), nullable=False)
+    clientid = db.Column(db.Integer, primary_key=True)
+    orgname = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)  # Add email column
     password = db.Column(db.String(255), nullable=False)
-    loginID = db.Column(db.Integer, db.ForeignKey('users.loginId'))
+    loginid = db.Column(db.Integer, db.ForeignKey('users.loginid'))  # Foreign key added
 
-    user = db.relationship('User', backref=db.backref('clients', lazy=True))
+    user = db.relationship('User', backref=db.backref('clients', lazy=True))  # Relationship
 
     def __repr__(self):
-        return f'<Client {self.ClientId}>'
+        return f'<Client {self.clientid}>'
+
 
 class CompanyDetails(db.Model):
-    __tablename__ = 'CompanyDetails'
+    __tablename__ = 'companydetails'
 
-    ClientId = db.Column(db.Integer, db.ForeignKey('clientRegister.ClientId'), primary_key=True)
-    CompnayName = db.Column(db.String(255), nullable=False)
-    CompanyFullName = db.Column(db.String(255), nullable=False)
-    BusinessType = db.Column(db.String(255))
-    CompanyEmail = db.Column(db.String(255))
-    CompanyContact = db.Column(db.String(50))
+    clientid = db.Column(db.Integer, db.ForeignKey('clientregister.clientid'), primary_key=True)
+    companyname = db.Column(db.String(255), nullable=False)
+    companyfullname = db.Column(db.String(255), nullable=False)
+    businesstype = db.Column(db.String(255))
+    companyemail = db.Column(db.String(255))
+    companycontact = db.Column(db.String(50))
 
     client = db.relationship('ClientRegister', backref=db.backref('company_details', lazy=True))
 
     def __repr__(self):
-        return f'<CompanyDetails {self.ClientId}>'
+        return f'<CompanyDetails {self.clientid}>'
 
 class CompanyAddress(db.Model):
-    __tablename__ = 'CompanyAddress'
+    __tablename__ = 'companyaddress'
 
-    ClientID = db.Column(db.Integer, db.ForeignKey('CompanyDetails.ClientId'), primary_key=True)
-    PostCode = db.Column(db.String(20))
-    AddressLineOne = db.Column(db.String(255))
-    AddressLineTwo = db.Column(db.String(255))
-    City = db.Column(db.String(100))
-    Province = db.Column(db.String(100))
-    Country = db.Column(db.String(100))
-    CompanyLogo = db.Column(db.LargeBinary)
+    clientid = db.Column(db.Integer, db.ForeignKey('companydetails.clientid'), primary_key=True)
+    postcode = db.Column(db.String(20))
+    addresslineone = db.Column(db.String(255))
+    addresslinetwo = db.Column(db.String(255))
+    city = db.Column(db.String(100))
+    province = db.Column(db.String(100))
+    country = db.Column(db.String(100))
+    companylogo = db.Column(db.LargeBinary)
 
     company = db.relationship('CompanyDetails', backref=db.backref('addresses', lazy=True))
 
     def __repr__(self):
-        return f'<CompanyAddress {self.ClientID}>'
+        return f'<CompanyAddress {self.clientid}>'
 
 class ClientBooking(db.Model):
-    __tablename__ = 'clientBooking'
+    __tablename__ = 'clientbooking'
 
-    clientID = db.Column(db.Integer, db.ForeignKey('clientRegister.ClientId'), primary_key=True)
-    BookingID = db.Column(db.Integer, primary_key=True)
-    NoRentalProp = db.Column(db.Integer)
-    salesMonth = db.Column(db.String(20))
-    ServiceRequired = db.Column(db.String(255))
-    FrequencyOfReport = db.Column(db.String(255))
-    DeliveryType = db.Column(db.String(255))
-    AddInfo = db.Column(db.String(255))
-    PaymentMethod = db.Column(db.String(50))
+    clientid = db.Column(db.Integer, db.ForeignKey('clientregister.clientid'), primary_key=True)
+    bookingid = db.Column(db.Integer, primary_key=True)
+    norentalprop = db.Column(db.Integer)
+    salesmonth = db.Column(db.String(20))
+    servicerequired = db.Column(db.String(255))
+    frequencyofreport = db.Column(db.String(255))
+    deliverytype = db.Column(db.String(255))
+    addinfo = db.Column(db.String(255))
+    paymentmethod = db.Column(db.String(50))
 
     client = db.relationship('ClientRegister', backref=db.backref('bookings', lazy=True))
 
     def __repr__(self):
-        return f'<ClientBooking {self.BookingID}>'
+        return f'<ClientBooking {self.bookingid}>'
 
 class PartnerRegister(db.Model):
-    __tablename__ = 'partnerRegister'
+    __tablename__ = 'partnerregister'
 
-    partnerID = db.Column(db.Integer, primary_key=True)
-    fullName = db.Column(db.String(255), nullable=False)
+    partnerid = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
-    loginID = db.Column(db.Integer, db.ForeignKey('users.loginId'))
+    loginid = db.Column(db.Integer, db.ForeignKey('users.loginid'))
 
     user = db.relationship('User', backref=db.backref('partners', lazy=True))
 
     def __repr__(self):
-        return f'<Partner {self.partnerID}>'
+        return f'<Partner {self.partnerid}>'
 
 class PartnerExperience(db.Model):
-    __tablename__ = 'partnerExperience'
+    __tablename__ = 'partnerexperience'
 
-    partnerID = db.Column(db.Integer, db.ForeignKey('partnerRegister.partnerID'), primary_key=True)
-    Experience = db.Column(db.String(255))
+    partnerid = db.Column(db.Integer, db.ForeignKey('partnerregister.partnerid'), primary_key=True)
+    experience = db.Column(db.String(255))
 
     partner = db.relationship('PartnerRegister', backref=db.backref('experience', lazy=True))
 
     def __repr__(self):
-        return f'<PartnerExperience {self.partnerID}>'
+        return f'<PartnerExperience {self.partnerid}>'
 
 class PartnerDetails(db.Model):
-    __tablename__ = 'partnerDetails'
+    __tablename__ = 'partnerdetails'
 
-    partnerID = db.Column(db.Integer, db.ForeignKey('partnerRegister.partnerID'), primary_key=True)
-    firstName = db.Column(db.String(255))
-    lastName = db.Column(db.String(255))
+    partnerid = db.Column(db.Integer, db.ForeignKey('partnerregister.partnerid'), primary_key=True)
+    firstname = db.Column(db.String(255))
+    lastname = db.Column(db.String(255))
     title = db.Column(db.String(50))
-    DateofBirth = db.Column(db.Date)
-    Gender = db.Column(db.String(50))
-    Email = db.Column(db.String(255))
-    Phone = db.Column(db.String(20))
-    proofodID = db.Column(db.String(255))
+    dateofbirth = db.Column(db.Date)
+    gender = db.Column(db.String(50))
+    email = db.Column(db.String(255))
+    phone = db.Column(db.String(20))
+    proofid = db.Column(db.String(255))
 
     partner = db.relationship('PartnerRegister', backref=db.backref('details', lazy=True))
 
     def __repr__(self):
-        return f'<PartnerDetails {self.partnerID}>'
+        return f'<PartnerDetails {self.partnerid}>'
 
 class PartnerAddress(db.Model):
-    __tablename__ = 'partnerAddress'
+    __tablename__ = 'partneraddress'
 
-    partnerID = db.Column(db.Integer, db.ForeignKey('partnerRegister.partnerID'), primary_key=True)
+    partnerid = db.Column(db.Integer, db.ForeignKey('partnerregister.partnerid'), primary_key=True)
     postcode = db.Column(db.String(20))
-    addressOne = db.Column(db.String(255))
-    addressTwo = db.Column(db.String(255))
-    City = db.Column(db.String(100))
+    addressone = db.Column(db.String(255))
+    addresstwo = db.Column(db.String(255))
+    city = db.Column(db.String(100))
     province = db.Column(db.String(100))
-    Country = db.Column(db.String(100))
-    dateJoined = db.Column(db.DateTime)
-    proofOfAddress = db.Column(db.LargeBinary)
+    country = db.Column(db.String(100))
+    datejoined = db.Column(db.DateTime)
+    proofaddress = db.Column(db.LargeBinary)
 
     partner = db.relationship('PartnerRegister', backref=db.backref('address', lazy=True))
 
     def __repr__(self):
-        return f'<PartnerAddress {self.partnerID}>'
+        return f'<PartnerAddress {self.partnerid}>'
 
 class PartnerProfDetails(db.Model):
-    __tablename__ = 'partnerProfDetails'
+    __tablename__ = 'partnerprofdetails'
 
-    partnerID = db.Column(db.Integer, db.ForeignKey('partnerRegister.partnerID'), primary_key=True)
-    CV = db.Column(db.LargeBinary)
-    DBS = db.Column(db.LargeBinary)
-    Insurance = db.Column(db.LargeBinary)
-    WishforTaurgoSupplied = db.Column(db.String(255))
+    partnerid = db.Column(db.Integer, db.ForeignKey('partnerregister.partnerid'), primary_key=True)
+    cv = db.Column(db.LargeBinary)
+    dbs = db.Column(db.LargeBinary)
+    insurance = db.Column(db.LargeBinary)
+    wishfortaurgosupplied = db.Column(db.String(255))
 
     partner = db.relationship('PartnerRegister', backref=db.backref('professional_details', lazy=True))
 
     def __repr__(self):
-        return f'<PartnerProfDetails {self.partnerID}>'
+        return f'<PartnerProfDetails {self.partnerid}>'
