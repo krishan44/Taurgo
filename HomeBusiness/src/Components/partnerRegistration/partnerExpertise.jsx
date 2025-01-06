@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from "./partnerExpertise.module.css";
 import dropDownIcon from "../../assets/icons/dropDown.png"; 
 
-function PartnerExpertise() { // Changed to PascalCase
+function PartnerExpertise() {
+    const navigate = useNavigate();
     const [openDropdowns, setOpenDropdowns] = useState({
         Photography: false,
         InventoryClerk: false,
@@ -10,8 +12,9 @@ function PartnerExpertise() { // Changed to PascalCase
         RICSSurveyor: false
     });
 
-    // Single state for selected business type
-    const [selectedBusiness, setSelectedBusiness] = useState('');
+    // State for selected business types
+    const [selectedBusinesses, setSelectedBusinesses] = useState([]);
+    const [error, setError] = useState('');
 
     const toggleDropdown = (type) => {
         setOpenDropdowns(prev => ({
@@ -21,13 +24,32 @@ function PartnerExpertise() { // Changed to PascalCase
     };
 
     const handleCheckboxChange = (type) => {
-        setSelectedBusiness(type);
+        setSelectedBusinesses(prev => 
+            prev.includes(type) 
+                ? prev.filter(item => item !== type) 
+                : [...prev, type]
+        );
+        setError(''); // Clear error on change
+    };
+
+    const validateForm = () => {
+        if (selectedBusinesses.length === 0) return 'At least one area of expertise must be selected';
+        return '';
+    };
+
+    const handleNext = () => {
+        const validationError = validateForm();
+        if (!validationError) {
+            navigate('/detail-partner'); // Navigate to the next step
+        } else {
+            setError(validationError);
+        }
     };
 
     return(
         <>  
-
         <div className={style.registerProcess}>
+            {error && <div className={style.error}>{error}</div>} {/* Display error message */}
             <div className={style.pageHeader}>
                 <div> <span className={style.selected}><span className={style.number}>1 </span><span>Select your experties <span className={style.dash}>|</span></span></span> </div>
                 <div> <span className={style.number}>2 </span><span>Client Details <span className={style.dash}>|</span></span> </div>
@@ -66,7 +88,7 @@ function PartnerExpertise() { // Changed to PascalCase
                             <input 
                                 type="checkbox" 
                                 name="BusinessType"
-                                checked={selectedBusiness === 'Photography'}
+                                checked={selectedBusinesses.includes('Photography')}
                                 onChange={() => handleCheckboxChange('Photography')}
                             />
                             <label htmlFor="Photography" className={style.type}>Photography</label>
@@ -103,7 +125,7 @@ function PartnerExpertise() { // Changed to PascalCase
                             <input 
                                 type="checkbox" 
                                 name="BusinessType"
-                                checked={selectedBusiness === 'InventoryClerk'}
+                                checked={selectedBusinesses.includes('InventoryClerk')}
                                 onChange={() => handleCheckboxChange('InventoryClerk')}
                             />
                             <label htmlFor="InventoryClerk" className={style.type}>Inventory Clerk</label>
@@ -140,7 +162,7 @@ function PartnerExpertise() { // Changed to PascalCase
                             <input 
                                 type="checkbox" 
                                 name="BusinessType"
-                                checked={selectedBusiness === 'FieldAssessor'}
+                                checked={selectedBusinesses.includes('FieldAssessor')}
                                 onChange={() => handleCheckboxChange('FieldAssessor')}
                             />
                             <label htmlFor="FieldAssessor" className={style.type}>Field Assessor</label>
@@ -177,7 +199,7 @@ function PartnerExpertise() { // Changed to PascalCase
                             <input 
                                 type="checkbox" 
                                 name="BusinessType"
-                                checked={selectedBusiness === 'RICSSurveyor'}
+                                checked={selectedBusinesses.includes('RICSSurveyor')}
                                 onChange={() => handleCheckboxChange('RICSSurveyor')}
                             />
                             <label htmlFor="RICSSurveyor" className={style.type}>RICS Surveyor/ Valuer</label>
@@ -210,7 +232,7 @@ function PartnerExpertise() { // Changed to PascalCase
                             )}
                         </div>
                     </div>
-                    <a href="" className={style.btnNext}>Next</a>
+                    <button className={style.btnNext} onClick={handleNext}>Next</button>
                 </div>
             </div>    
         </div>

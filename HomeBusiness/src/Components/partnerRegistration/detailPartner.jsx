@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from './detailPartner.module.css';
 import Drop from "../../assets/icons/comboDrop.png"; 
 import Calendar from './calender';
@@ -6,6 +7,7 @@ import infoIcon from "../../assets/icons/warning.png";
 import attachIcon from "../../assets/icons/attach.png"; 
 
 function DetailPartner() {
+    const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState({
         title: false,
         gender: false
@@ -14,7 +16,16 @@ function DetailPartner() {
     const [selectedGender, setSelectedGender] = useState('');
     const [showCalendar, setShowCalendar] = useState(false);
     const [birthDate, setBirthDate] = useState('');
-    
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        logo: null,
+        logoName: ''
+    });
+    const [error, setError] = useState('');
+
     const titles = ["Mr.", "Mrs.", "Ms.", "Dr.", "Prof."];
     const genders = ["Male", "Female", "Other"];
 
@@ -37,7 +48,6 @@ function DetailPartner() {
 
     const handleDateClick = () => {
         setShowCalendar(true);
-
     };
 
     const handleDateSelect = (date) => {
@@ -54,16 +64,58 @@ function DetailPartner() {
         setShowCalendar(false);
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+        setError(''); // Clear error on change
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setFormData({
+            ...formData,
+            logo: file,
+            logoName: file.name // Store the file name
+        });
+        setError(''); // Clear error on change
+    };
+
+    const validateForm = () => {
+        if (!formData.firstName) return 'First Name is required';
+        if (!formData.lastName) return 'Last Name is required';
+        if (!selectedTitle) return 'Title is required';
+        if (!birthDate) return 'Date of Birth is required';
+        if (!selectedGender) return 'Gender is required';
+        if (!formData.email) return 'Email is required';
+        if (!/\S+@\S+\.\S+/.test(formData.email)) return 'Enter a valid email address';
+        if (!formData.phone) return 'Phone is required';
+        if (!formData.logo) return 'Upload Company Logo is required';
+        return '';
+    };
+
+    const handleNext = () => {
+        const validationError = validateForm();
+        if (!validationError) {
+            navigate('/current-address'); // Navigate to the next step
+        } else {
+            setError(validationError);
+        }
+    };
+
     return (
         <>
-          <div className={style.personalDetials}>
-                      <div className={style.pageHeader}>
-                          <div> <span className={style.selected}><span className={style.number}>1 </span><span>Select your experties <span className={style.dash}>|</span></span></span> </div>
-                          <div> <span className={style.number}>2 </span><span>Client Details <span className={style.dash}>|</span></span> </div>
-                          <div> <span className={style.number}>3 </span><span>Company Address <span className={style.dash}>|</span></span> </div>
-                          <div> <span className={style.number}>4 </span><span>Fit To Work <span className={style.dash}>|</span></span> </div>
-                          <div> <span className={style.number}>5 </span><span>Onbording Form Complete</span> </div>
-                      </div>
+            <div className={style.personalDetials}>
+                {error && <div className={style.error}>{error}</div>} {/* Display error message */}
+                <div className={style.pageHeader}>
+                    <div> <span className={style.selected}><span className={style.number}>1 </span><span>Select your experties <span className={style.dash}>|</span></span></span> </div>
+                    <div> <span className={style.number}>2 </span><span>Client Details <span className={style.dash}>|</span></span> </div>
+                    <div> <span className={style.number}>3 </span><span>Company Address <span className={style.dash}>|</span></span> </div>
+                    <div> <span className={style.number}>4 </span><span>Fit To Work <span className={style.dash}>|</span></span></div>
+                    <div> <span className={style.number}>5 </span><span>Onboarding Form Complete</span></div>
+                </div>
                 <div className={style.Details}>
                     <span className={style.title}>Personal Details</span>
                     <div className={style.inputGrid}>
@@ -74,8 +126,11 @@ function DetailPartner() {
                             <br />
                             <input 
                                 type="text" 
+                                name="firstName"
                                 className={style.datafield}  
                                 placeholder='First Name' 
+                                value={formData.firstName}
+                                onChange={handleChange}
                                 required 
                             />
                         </div>
@@ -86,8 +141,11 @@ function DetailPartner() {
                             <br />
                             <input 
                                 type="text" 
+                                name="lastName"
                                 className={style.datafield}  
                                 placeholder='Last Name' 
+                                value={formData.lastName}
+                                onChange={handleChange}
                                 required 
                             />
                         </div>
@@ -178,9 +236,10 @@ function DetailPartner() {
                                     </div>
                                 )}
                             </div>
+
                         </div>
                         <div>
-
+                            {/* for space */}
                         </div>
                         <div className={style.inputFields}>
                             <span className={style.fieldName}>
@@ -189,8 +248,11 @@ function DetailPartner() {
                             <br />
                             <input 
                                 type="text" 
+                                name="email"
                                 className={style.datafield}  
                                 placeholder='hello@email.com' 
+                                value={formData.email}
+                                onChange={handleChange}
                                 required 
                             />
                         </div>
@@ -201,8 +263,11 @@ function DetailPartner() {
                             <br />
                             <input 
                                 type="text" 
+                                name="phone"
                                 className={style.datafield}  
                                 placeholder='Add your Phone Number' 
+                                value={formData.phone}
+                                onChange={handleChange}
                                 required 
                             />
                         </div>
@@ -229,16 +294,17 @@ function DetailPartner() {
                                     className={style.attachFile}
                                     id="fileInput"
                                     accept=".png"
+                                    onChange={handleFileChange}
                                     required 
                                 />
                                 <label htmlFor="fileInput" className={style.customFileUpload}>
                                     <img src={attachIcon} alt="attach" className={style.attachIcon} />
-                                    <span>Upload logo in (.png) format</span>
+                                    <span>{formData.logoName || 'Upload logo in (.png) format'}</span> {/* Display the file name */}
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <a href="" className={style.btnNext}>Next</a>
+                    <button className={style.btnNext} onClick={handleNext}>Next</button>
                 </div>
             </div>
         </>

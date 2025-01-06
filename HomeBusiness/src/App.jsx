@@ -32,10 +32,10 @@ function App() {
         <Route path="/complete-client" element={<Success />} /> 
         
         <Route path="/partner-expertise" element={<PartnerExpertise />} /> 
-        <Route path="/details" element={<DetailPartner />} />
-        <Route path="/address" element={<CurrentAddress />} />
+        <Route path="/detail-partner" element={<DetailPartner />} />
+        <Route path="/current-address" element={<CurrentAddress />} />
         <Route path="/attachments" element={<Attachment />} />
-        <Route path="/complete" element={<Complete />} />
+        <Route path="/complete-partner" element={<Complete />} />
       </Routes>
     </Router>
   );
