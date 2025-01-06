@@ -22,7 +22,7 @@ function CreateAccount() {
         setError(''); 
     };
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         const { organisation, email, password, repeatPassword } = formData;
     
         if (!organisation || !email || !password || !repeatPassword) {
@@ -35,9 +35,30 @@ function CreateAccount() {
             return;
         }
     
-        // console.log('Registration successful:', formData);
-        // alert('Registration successful!');
-        navigate('/expertise'); // Navigate to expertise page
+        // Send the data to the backend
+        try {
+            const response = await fetch('http://127.0.0.1:5000/client-register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    organisation,
+                    email,
+                    password,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                navigate('/expertise'); // Navigate to expertise page
+            } else {
+                setError(result.message || 'Registration failed.');
+            }
+        } catch (error) {
+            setError('An error occurred. Please try again later.');
+        }
     };
 
     return (
