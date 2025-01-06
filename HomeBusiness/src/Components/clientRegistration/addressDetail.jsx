@@ -25,7 +25,7 @@ function AddressDetail() {
         province: '',
         country: '',
         logo: null,
-        logoName: '', // Add a field to store the file name
+        logoName: '', 
     });
 
     const [error, setError] = useState('');
@@ -59,9 +59,9 @@ function AddressDetail() {
         setFormData({
             ...formData,
             logo: file,
-            logoName: file.name // Store the file name
+            logoName: file.name 
         });
-        setError(''); // Clear error on change
+        setError(''); 
     };
 
     const handleNext = () => {
