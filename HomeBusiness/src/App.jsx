@@ -9,6 +9,7 @@ import FormComplete from "./Components/clientRegistration/formComplete";
 import Success from "./Components/clientRegistration/success";  
 import PersonalDetail from "./Components/clientRegistration/PersonalDetail"; // Ensure PersonalDetail component is imported
 
+import PartnerExpertise from './Components/partnerRegistration/partnerExpertise';
 import DetailPartner from './Components/partnerRegistration/detailPartner';
 import CurrentAddress from './Components/partnerRegistration/currentAddress';
 import Attachment from './Components/partnerRegistration/attachments';
@@ -25,11 +26,12 @@ function App() {
         <Route path="/client-register" element={<CreateAccount />} />
         <Route path="/expertise" element={<Expertise />} />
         <Route path="/company-address" element={<AddressDetail />} />
+        <Route path="/personal-details" element={<PersonalDetail />} /> 
         <Route path="/more-details" element={<MoreDetails />} />
         <Route path="/complete" element={<FormComplete />} />
         <Route path="/complete-client" element={<Success />} /> 
-        <Route path="/personal-details" element={<PersonalDetail />} /> {/* Add this route */}
-
+        
+        <Route path="/partner-expertise" element={<PartnerExpertise />} /> 
         <Route path="/details" element={<DetailPartner />} />
         <Route path="/address" element={<CurrentAddress />} />
         <Route path="/attachments" element={<Attachment />} />
