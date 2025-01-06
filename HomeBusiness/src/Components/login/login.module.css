@@ -170,6 +170,17 @@
     font-weight: 600;
 }
 
+.registerLink {
+    color: #035C59;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+.registerLink:hover {
+    text-decoration: underline;
+}
+
 .bottomElements {
     position: relative;
     top: 736px;

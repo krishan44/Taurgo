@@ -2,8 +2,11 @@ import style from "./partnerAccount.module.css"
 import logoTaurgo from "../../assets/loginPage/logoTaurgo.png";
 import loginPhoto from "../../assets/loginPage/loginPhoto.jpeg";
 import RICS from "../../assets/loginPage/RICS.png";
+import { Link, useNavigate } from 'react-router-dom';
 
 function partnerAccount(){
+    const navigate = useNavigate();
+
     return(
         <>
             <div className={style.mainContainer}>
@@ -11,8 +14,12 @@ function partnerAccount(){
                             <img src={logoTaurgo} alt="Logo" className={style.logo} /> 
                             <div className={style.loginFields}>
                                 <div className={style.changeBtns}>
-                                <a href=""><button className={style.btnClient}>Register as a Client</button></a>
-                                <a href=""><button className={style.btnPartner}>Register as a Partner</button></a>
+                                <Link to="/client-register">
+                                    <button className={style.btnClient}>Register as a Client</button>
+                                </Link>
+                                <Link to="/register">
+                                    <button className={style.btnPartner}>Register as a Partner</button>
+                                </Link>
                                 </div>
                                 <h2>Create your Account</h2>
                                 <span className={style.fieldName}>Full Name</span>
@@ -25,7 +32,9 @@ function partnerAccount(){
                                 <input type="password" placeholder='••••••••' required/>
                             
                                 <a href=""><button className={style.signinBtn}>Register</button></a>
-                                <span className={style.registerText}>I have an Account? <a href="">Login</a></span>
+                                <span className={style.registerText}>I have an Account? 
+                                    <Link to="/login"> <span>Login </span></span> </Link>
+                                    
             
                             </div>
                         </div>

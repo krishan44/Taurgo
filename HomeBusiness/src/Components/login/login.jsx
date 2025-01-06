@@ -2,6 +2,7 @@ import style from './login.module.css';
 import logoTaurgo from "../../assets/loginPage/logoTaurgo.png";
 import loginPhoto from "../../assets/loginPage/loginPhoto.jpeg";
 import RICS from "../../assets/loginPage/RICS.png";
+import { Link } from 'react-router-dom';
 
 function Login() {
     return(
@@ -23,7 +24,10 @@ function Login() {
                         <a href="https://github.com/krishan44?tab=overview&from=2025-01-01&to=2025-01-04" className={style.forgotPassword}>Forgot Password</a>
                     </div>
                     <a href=""><button className={style.signinBtn}>Sign In</button></a>
-                    <span className={style.registerText}>Don't have an Account? <a href="">Register</a></span>
+                    <span className={style.registerText}>
+                        Don't have an Account? 
+                        <Link to="/register" className={style.registerLink}>Register</Link>
+                    </span>
 
                 </div>
             </div>

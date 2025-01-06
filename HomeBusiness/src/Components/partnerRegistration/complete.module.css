@@ -1,0 +1,91 @@
+.FormComplete{
+    /* height: 100vh;   */
+    font-family: "Poppins", serif;
+    padding: 40px 0;
+    margin-bottom: 50px;
+}
+
+.pageHeader{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 1280px;
+    height: 72px;
+    gap: 12px;
+    position: relative;
+    top: 40px; 
+    left: 80px;
+    padding: 24px 32px;
+    border: 1px solid #CACACA;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.number{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #373737;
+    margin-right: 8px;
+}
+
+.dash {
+    display: inline-block;
+    transform: rotate(90deg);
+    margin: 0 12px;
+    color: #808080;
+}
+
+.content{
+    width: 1170px;
+    /* height: 393px; */
+    /* background-color: antiquewhite; */
+    position: relative;
+    top: 64px; 
+    left: 135px;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.title{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+.confirm,.paragraphOne,.paragraphTwo{
+    margin-top: 24px;
+}
+
+.paragraphOne,.paragraphTwo{
+    font-size: 18px;
+    color: #808080;
+}
+
+.contact{
+    color: #1442A7;
+}
+
+.btnNext{
+    width: 63px;
+    height: 42px;
+    padding: 10px 16px ;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+    background-color: #035C59;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    top: 50px;
+    left: 1200px;
+    
+}

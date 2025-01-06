@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+
+.attachments{
+    font-family: "Poppins", serif;
+    width: 1440px;
+    padding: 40px 0;
+}
+
+.pageHeader{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 1280px;
+    height: 72px;
+    gap: 12px;
+    position: relative;
+    top: 40px; 
+    left: 80px;
+    padding: 24px 32px;
+    border: 1px solid #CACACA;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.number{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #373737;
+    margin-right: 8px;
+}
+
+.dash {
+    display: inline-block;
+    transform: rotate(90deg);
+    margin: 0 12px;
+    color: #808080;
+}
+
+.professionalDetails{
+    width: 1170px;
+    position: relative;
+    top: 64px; 
+    left: 135px;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.uploadField{
+    margin-top: 24px;
+}
+
+.instruction{
+    font-size: 16px;
+    font-weight: 400;
+    color: #808080;
+}
+
+.fileUploadContainer {
+    position: relative;
+    width: 482px;
+    height: 123px; 
+    background-color: #DAECEC;
+    margin-top: 12px; 
+}
+
+.uploadText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.clicktoUpload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #035C59;
+    font-size: 16px; 
+    font-weight: 400;
+    line-height: 22.4px;
+}
+
+.orDrag {
+    color: #808080;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19.2px;
+}
+
+.attachFile {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.customFileUpload {
+    border: 1px dashed #035C59;
+    border-radius: 8px;
+    padding: 32px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.attachIcon {
+    width: 24px;
+    height: 24px;
+    margin-left: 0;
+}
+
+.click{
+    font-size: 16px;
+}
+
+.orDrag{
+    font-size: 14px;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.checkbox {
+    width: 16.5px;
+    height: 16.5px;
+    cursor: pointer;
+}
+
+.checkboxLabel {
+    font-family: "Poppins", serif;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 1106px;
+    margin-top: 24px;
+}
+
+.btnNext{
+    width: 63px;
+    height: 42px;
+    padding: 10px 16px ;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: none;
+    background-color: #035C59;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.goBack{
+    text-decoration: none;
+    color: #035C59;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22.4px;
+    font-weight: 400;
+}
+
+.goBack img{
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
