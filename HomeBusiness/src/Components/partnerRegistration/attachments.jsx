@@ -83,7 +83,7 @@ function Attachment() {
                     </div>
 
                     <div className={style.uploadField}>
-                        <span className={style.instruction}>Please upload related professional supporting documentation. CV, Certifications, Accreditations.</span>
+                        <span className={style.instruction}>Valid DBS within 12 months.</span>
                         <div className={style.fileUploadContainer}>
                             <input 
                                 type="file" 
@@ -105,7 +105,7 @@ function Attachment() {
                     </div>
 
                     <div className={style.uploadField}>
-                        <span className={style.instruction}>Please upload related professional supporting documentation. CV, Certifications, Accreditations.</span>
+                        <span className={style.instruction}>Valid Professional Indemnity Insurance Certificate.</span>
                         <div className={style.fileUploadContainer}>
                             <input 
                                 type="file" 
