@@ -89,10 +89,39 @@ function MoreDetails() {
         return '';
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         const validationError = validateForm();
         if (!validationError) {
-            navigate('/complete'); 
+            const dataToSubmit = {
+                rentalProperties: formData.rentalProperties,
+                salesProperties: formData.salesProperties,
+                serviceRequirements: formData.serviceRequirements,
+                frequency: formData.frequency,
+                deliveryMethod: formData.deliveryMethod,
+                additionalInfo: formData.additionalInfo,
+                paymentMethod: formData.paymentMethod,
+            };
+    
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/submit_booking', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToSubmit),
+                });
+    
+                const result = await response.json();
+                if (!response.ok) {
+                    setError(result.error || 'Failed to submit data. Please try again.');
+                    return;
+                }
+    
+                navigate('/complete');
+            } catch (error) {
+                console.error('Fetch error:', error);
+                setError('Failed to fetch data. Please check your network connection or server.');
+            }
         } else {
             setError(validationError);
         }
@@ -157,7 +186,7 @@ function MoreDetails() {
                             <div className={style.checkboxItem}>
                                 <input 
                                     type="checkbox" 
-                                    id="service2" 
+                                    id="Media Packs" 
                                     className={style.checkbox} 
                                     onChange={handleCheckboxChange}
                                     checked={formData.serviceRequirements.includes('service2')}
