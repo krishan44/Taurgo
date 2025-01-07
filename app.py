@@ -20,7 +20,6 @@ app.permanent_session_lifetime = timedelta(days=7)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = {'png'}
 
-
 # User model (table: users)
 class User(db.Model):
     __tablename__ = 'users'  # Table name in lowercase
@@ -86,7 +85,6 @@ def register_client():
     }), 201
 
 
-# Company details model (table: companydetails)
 class CompanyDetails(db.Model):
     __tablename__ = 'companydetails'
 
@@ -260,6 +258,95 @@ def register_company_address():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+class ClientBooking(db.Model):
+    __tablename__ = 'clientbooking'
+
+    clientid = db.Column(db.Integer, db.ForeignKey('clientregister.clientid'), primary_key=True)
+    bookingid = db.Column(db.Integer, primary_key=True)
+    norentalprop = db.Column(db.Integer)
+    servicerequired = db.Column(db.String(255))
+    frequencyofreport = db.Column(db.String(255))
+    deliverytype = db.Column(db.String(255))
+    addinfo = db.Column(db.String(255))
+    paymentmethod = db.Column(db.String(50))
+    salesmonth = db.Column(db.Integer)
+
+    client = db.relationship('ClientRegister', backref=db.backref('bookings', lazy=True))
+
+    def __repr__(self):
+        return f'<ClientBooking {self.bookingid}>'
+
+@app.route('/api/submit_booking', methods=['POST'])
+def submit_booking():
+    try:
+        # Get the JSON data from the frontend
+        data = request.get_json()
+        print("Received data:", data)
+
+        # Extract data
+        norentalprop = data.get('rentalProperties')
+        salesmonth = data.get('salesProperties')
+        servicerequired = ', '.join(data.get('serviceRequirements', []))
+        frequencyofreport = data.get('frequency')
+        deliverytype = data.get('deliveryMethod')
+        addinfo = data.get('additionalInfo', '')
+        paymentmethod = (
+            'Invoice' if data.get('paymentMethod', {}).get('invoice') else
+            'Card' if data.get('paymentMethod', {}).get('card') else ''
+        )
+
+        # Fetch the latest client
+        client = ClientRegister.query.order_by(ClientRegister.clientid.desc()).first()
+
+        if not client:
+            return jsonify({'error': 'No client found. Please register a client first.'}), 400
+
+        clientid = client.clientid
+
+        # Create a new booking
+        new_booking = ClientBooking(
+            clientid=clientid,
+            norentalprop=norentalprop,
+            salesmonth=salesmonth,
+            servicerequired=servicerequired,
+            frequencyofreport=frequencyofreport,
+            deliverytype=deliverytype,
+            addinfo=addinfo,
+            paymentmethod=paymentmethod
+        )
+
+        # Add and commit the new booking
+        db.session.add(new_booking)
+        db.session.commit()
+
+        # Fetch and verify the committed booking
+        saved_booking = ClientBooking.query.filter_by(clientid=clientid, bookingid=new_booking.bookingid).first()
+
+        if not saved_booking:
+            return jsonify({"error": "Booking could not be verified after saving."}), 500
+
+        # Return success response
+        return jsonify({
+            "message": "Booking successfully created!",
+            "booking": {
+                "bookingid": saved_booking.bookingid,
+                "norentalprop": saved_booking.norentalprop,
+                "salesmonth": saved_booking.salesmonth,
+                "servicerequired": saved_booking.servicerequired,
+                "frequencyofreport": saved_booking.frequencyofreport,
+                "deliverytype": saved_booking.deliverytype,
+                "addinfo": saved_booking.addinfo,
+                "paymentmethod": saved_booking.paymentmethod,
+            }
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()  # Rollback any pending changes
+        print("Error in submit_booking:", str(e))  # Debugging log
+        return jsonify({"error": "An error occurred while processing the booking.", "details": str(e)}), 500
+
 
 # Run the Flask app
 if __name__ == '__main__':
