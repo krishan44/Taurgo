@@ -67,12 +67,12 @@ class ClientBooking(db.Model):
     clientid = db.Column(db.Integer, db.ForeignKey('clientregister.clientid'), primary_key=True)
     bookingid = db.Column(db.Integer, primary_key=True)
     norentalprop = db.Column(db.Integer)
-    salesmonth = db.Column(db.String(20))
     servicerequired = db.Column(db.String(255))
     frequencyofreport = db.Column(db.String(255))
     deliverytype = db.Column(db.String(255))
     addinfo = db.Column(db.String(255))
     paymentmethod = db.Column(db.String(50))
+    salesmonth = db.Column(db.Integer)
 
     client = db.relationship('ClientRegister', backref=db.backref('bookings', lazy=True))
 
