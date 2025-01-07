@@ -56,21 +56,69 @@ function AddressDetail() {
     // Handle file input change
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        setFormData({
-            ...formData,
-            logo: file,
-            logoName: file.name 
-        });
-        setError(''); 
-    };
+    
+    if (file) {
+        const reader = new FileReader();
+        
+        reader.onloadend = () => {
+            const base64Logo = reader.result.split(',')[1]; // Remove the data URL part
+            console.log("Base64 logo:", base64Logo);
 
-    const handleNext = () => {
-        if (isFormValid()) {
+            // Update the state with both logo (base64) and file name
+            setFormData({
+                ...formData,
+                logo: base64Logo,
+                logoName: file.name,  // Store the file name to display
+            });
+        };
+        
+        reader.readAsDataURL(file);  // Convert the file to base64
+    }
+    };
+    
+    // Handle form submission
+    const handleNext = async () => {
+        const { postcode, address1, address2, city, province, country, logo } = formData;
+    
+        // Validate all fields
+        if (!postcode || !address1 || !address2 || !city || !province || !country || !logo) {
+            setError('All fields must be filled, including the logo!');
+            return;
+        }
+    
+        // Now logo is already in base64 (stored in formData.logo)
+        const dataToSubmit = {
+            postcode,
+            address1,
+            address2,
+            city,
+            province,
+            country,
+            logo: logo,  
+        };
+    
+        try {
+            const response = await fetch('http://127.0.0.1:5000/company-address', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSubmit),
+            });
+    
+            const result = await response.json();
+            if (!response.ok) {
+                setError(result.error || 'Failed to submit data. Please try again.');
+                return;
+            }
+    
             navigate('/more-details');
-        } else {
-            setError('Please fill in all required fields and upload the logo.');
+        } catch (error) {
+            console.error('Fetch error:', error);
+            setError('Failed to fetch data. Please check your network connection or server.');
         }
     };
+    
 
     const handleGoBack = () => {
         navigate('/personal-details');

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from "./expertise.module.css";
 import dropDownIcon from "../../assets/icons/dropDown.png"; 
 
+
 function Expertise() {
     const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ function Expertise() {
             return;
         }
         // Navigate to the next page
-        navigate('/personal-details'); 
+        navigate('/personal-details', { state: { selectedBusiness } }); 
     };
 
     return (
