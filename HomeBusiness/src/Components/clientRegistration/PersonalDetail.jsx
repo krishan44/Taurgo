@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import style from './personalDetail.module.css';
 
 function PersonalDetail() {
+    const location = useLocation();
+    const selectedBusiness = location.state?.selectedBusiness || '';
+
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -24,37 +27,68 @@ function PersonalDetail() {
         setError(''); // Clear the error message when the user types
     };
 
-    // Handle Next button click
-    const handleNext = () => {
+    const handleNext = async () => {
         const { companyName, fullName, email, phone } = formData;
-
-        // Check if any field is empty
+    
+        // Validate all fields
         if (!companyName || !fullName || !email || !phone) {
             setError('All fields must be filled!');
             return;
         }
-
-        // Validate email format
+    
+        if (!selectedBusiness) {
+            setError('Business type is missing! Please go back and select a business type.');
+            return;
+        }
+    
         if (!/\S+@\S+\.\S+/.test(email)) {
             setError('Enter a valid email address!');
             return;
         }
-
-        // Validate phone number format (numeric only)
+    
         if (!/^\d+$/.test(phone)) {
             setError('Enter a valid phone number!');
             return;
         }
-
-        // Navigate to the next step if validation passes
-        navigate('/company-address'); // Replace with your desired route
+    
+        const dataToSubmit = {
+            companyName,
+            fullName,
+            email,
+            phone,
+            businessType: selectedBusiness
+        };
+    
+        try {
+            const response = await fetch('http://127.0.0.1:5000/company-details', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSubmit),
+            });
+    
+            // Check if the response is successful
+            const result = await response.json();
+    
+            if (!response.ok) {
+                setError(result.error || 'Failed to submit data. Please try again.');
+                return;
+            }
+    
+            // Navigate to next page upon successful submission
+            navigate('/company-address');
+        } catch (error) {
+            console.error('Fetch error:', error);
+            setError('Failed to fetch data. Please check your network connection or server.');
+        }
     };
 
     return (
         <>
             <div className={style.personalDetials}>
                 <div className={style.pageHeader}>
-                    <div> <span className={style.selected}><span className={style.number}>1 </span><span>Select your experties <span className={style.dash}>|</span></span></span> </div>
+                    <div> <span className={style.selected}><span className={style.number}>1 </span><span>Select your expertise <span className={style.dash}>|</span></span></span> </div>
                     <div> <span className={style.number}>2 </span><span>Client Details <span className={style.dash}>|</span></span> </div>
                     <div> <span className={style.number}>3 </span><span>Company Address <span className={style.dash}>|</span></span> </div>
                     <div> <span className={style.number}>4 </span><span>Fit To Work <span className={style.dash}>|</span></span> </div>
