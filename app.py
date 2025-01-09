@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from flask_cors import CORS
 from datetime import timedelta
-from models import db, User, ClientRegister, CompanyDetails, CompanyAddress, ClientBooking,PartnerRegister,PartnerExperience,PartnerDetails,PartnerAddress,PartnerProfDetails
+from models import db, User, ClientRegister, CompanyDetails, CompanyAddress, ClientBooking
 import os
 
 
@@ -21,6 +21,34 @@ db = SQLAlchemy(app)
 app.permanent_session_lifetime = timedelta(days=7)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = {'png'}
+
+# User model (table: users)
+class User(db.Model):
+    __tablename__ = 'users'  # Table name in lowercase
+
+    loginid = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    password = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+
+    def __repr__(self):
+        return f'<User {self.loginid}>'
+
+
+# Client registration model (table: clientregister)
+class ClientRegister(db.Model):
+    __tablename__ = 'clientregister'
+
+    clientid = db.Column(db.Integer, primary_key=True)
+    orgname = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)  # Add email column
+    password = db.Column(db.String(255), nullable=False)
+    loginid = db.Column(db.Integer, db.ForeignKey('users.loginid'))  # Foreign key added
+
+    user = db.relationship('User', backref=db.backref('clients', lazy=True))  # Relationship
+
+    def __repr__(self):
+        return f'<Client {self.clientid}>'
 
 
 # Register route for clients
@@ -57,6 +85,22 @@ def register_client():
         'user': {'loginid': new_user.loginid, 'email': new_user.email},
         'client': {'clientid': new_client.clientid, 'orgname': new_client.orgname}
     }), 201
+
+
+class CompanyDetails(db.Model):
+    __tablename__ = 'companydetails'
+
+    clientid = db.Column(db.Integer, db.ForeignKey('clientregister.clientid'), primary_key=True)
+    companyname = db.Column(db.String(255), nullable=False)
+    companyfullname = db.Column(db.String(255), nullable=False)
+    businesstype = db.Column(db.String(255))
+    companyemail = db.Column(db.String(255))
+    companycontact = db.Column(db.String(50))
+
+    client = db.relationship('ClientRegister', backref=db.backref('company_details', lazy=True))
+
+    def __repr__(self):
+        return f'<CompanyDetails {self.clientid}>'
 
 
 # Register company details route
@@ -124,6 +168,25 @@ def register_company_details():
         db.session.rollback()
         print("Error:", str(e))  # Debugging for errors
         return jsonify({'error': 'An error occurred while processing your request.'}), 500
+
+#Company address Table
+class CompanyAddress(db.Model):
+    __tablename__ = 'companyaddress'
+
+    clientid = db.Column(db.Integer, db.ForeignKey('companydetails.clientid'), primary_key=True)
+    postcode = db.Column(db.String(20))
+    addresslineone = db.Column(db.String(255))
+    addresslinetwo = db.Column(db.String(255))
+    city = db.Column(db.String(100))
+    province = db.Column(db.String(100))
+    country = db.Column(db.String(100))
+    companylogo = db.Column(db.LargeBinary)
+
+    company = db.relationship('CompanyDetails', backref=db.backref('addresses', lazy=True))
+
+    def __repr__(self):
+        return f'<CompanyAddress {self.clientid}>'
+
 
 def save_base64_image(base64_data):
     # Decode the base64 data into binary
@@ -197,6 +260,25 @@ def register_company_address():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+class ClientBooking(db.Model):
+    __tablename__ = 'clientbooking'
+
+    clientid = db.Column(db.Integer, db.ForeignKey('clientregister.clientid'), primary_key=True)
+    bookingid = db.Column(db.Integer, primary_key=True)
+    norentalprop = db.Column(db.Integer)
+    servicerequired = db.Column(db.String(255))
+    frequencyofreport = db.Column(db.String(255))
+    deliverytype = db.Column(db.String(255))
+    addinfo = db.Column(db.String(255))
+    paymentmethod = db.Column(db.String(50))
+    salesmonth = db.Column(db.Integer)
+
+    client = db.relationship('ClientRegister', backref=db.backref('bookings', lazy=True))
+
+    def __repr__(self):
+        return f'<ClientBooking {self.bookingid}>'
 
 @app.route('/api/submit_booking', methods=['POST'])
 def submit_booking():
